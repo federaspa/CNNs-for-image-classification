@@ -80,8 +80,8 @@ Note that as Pytorch does not natively implement a Callback function, we impleme
 
 ## Results
 
-After 20 epochs, our model has reached a satisfying performance on the test set of about . \
-We can notice that with our parameters the model does not seem to be overfitting, therefore there is still room to boost it by increasign the number of epochs, tweaking the type and parameters of the optimizer or decreasing the batch size.
+Setting 20 epochs, our model has reached a satisfying performance on the test set of about 98%, stopping after 15 thanks to our Callback. \
+We can notice that with our parameters the model does not seem to be overfitting, therefore there is still room to boost it by tweaking the type and parameters of the optimizer or decreasing the batch size.
 
 # II. Second step: Simple Convolutionnal Neural Network on more complex data
 
@@ -108,6 +108,10 @@ The model's architecture for this part is almost identical to the one we used to
 
 ### Training
 The model's training is also almost identical to the one for the first part, with the only difference being the number of classes we pass to the MultiClassAccuracy metric.
+
+## Results
+
+
 
 # III. Third step: Transfer Learning
 
@@ -154,3 +158,7 @@ As the model architecture is quite big, we only display the classifier's:
 The model's training is almost identical to the ones before, again with the only differences being:
 * The number of classes we pass to the MultiClassAccuracy metric;
 * We use RMSprop with 0.01 learning rate instead of AdamW with 0.001 learning rate
+
+## Results
+
+# Conclusions
