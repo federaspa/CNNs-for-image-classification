@@ -53,16 +53,16 @@ To feed the data to a CNN, we need to shape it as required by Pytorch. As input,
 
 ## Building the model
 
+The model we will use to classify our data is built on the [LeNet](https://en.wikipedia.org/wiki/LeNet) architecture:
+
+<img src="https://drive.google.com/uc?export=view&id=154FJGiTvd7LPUI8JhemeoO8Bl1CG27hw" 
+     height="600" />
+
 We build our Pytorch model by creating a custom class called `LeNet` that extends `nn.Module`. \
 In it we find:
 - `conv_stack`, which implements the convolutional layers of LeNet and to which we will pass our images to extract their features;
 - `flatten`, which will flatten our features to be passed to the next stack;
 - `dense_stack`, which implements the dense layers of LeNet and to which we will pass the flattened features to classify the images.
-
-The model we will use to classify our data is built on the [LeNet](https://en.wikipedia.org/wiki/LeNet) architecture:
-
-<img src="https://drive.google.com/uc?export=view&id=154FJGiTvd7LPUI8JhemeoO8Bl1CG27hw" 
-     height="600" />
 
 Thanks to the the torchviz library, we can check out our model's structure and confirm that it is the same as LeNet's:
 
@@ -133,3 +133,24 @@ Note that after the images are loaded, they look slightly corrupted:\
 ![Cow](https://github.com/federaspa/CNNs-for-image-classification/blob/main/Images/cow.png)
 
 This is normal and is an effect of our resizing and conversion steps we implemented at loading.
+
+## Building and Training the model
+
+###Architecture
+
+Creating the feature extraction part of our model is only a matter of importing it from the `torchvision` library.\
+In doing so, however, we also import the classifier part, that we will replace with our own, which consists of:
+* One linear layer with 1024 neurons and a ReLu activation function;
+* One linear layer with 2 neurons and a Softmax activation function.
+
+We also start by freezing all the network's layers except for our classifier's.
+
+As the model architecture is quite big, we only display the classifier's:
+
+![animal_model](https://github.com/federaspa/CNNs-for-image-classification/blob/main/Images/model_animal_torchviz.png)
+
+### Training
+
+The model's training is almost identical to the ones before, again with the only differences being:
+* The number of classes we pass to the MultiClassAccuracy metric;
+* We use RMSprop with 0.01 learning rate instead of AdamW with 0.001 learning rate
