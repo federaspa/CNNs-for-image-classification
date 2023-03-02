@@ -80,7 +80,7 @@ Note that as Pytorch does not natively implement a Callback function, we impleme
 
 ## Results
 
-After 20 epochs, our model has reached a satisfying performance on the test set fo about . \
+After 20 epochs, our model has reached a satisfying performance on the test set of about . \
 We can notice that with our parameters the model does not seem to be overfitting, therefore there is still room to boost it by increasign the number of epochs, tweaking the type and parameters of the optimizer or decreasing the batch size.
 
 # II. Second step: Simple Convolutionnal Neural Network on more complex data
@@ -136,7 +136,7 @@ This is normal and is an effect of our resizing and conversion steps we implemen
 
 ## Building and Training the model
 
-###Architecture
+### Architecture
 
 Creating the feature extraction part of our model is only a matter of importing it from the `torchvision` library.\
 In doing so, however, we also import the classifier part, that we will replace with our own, which consists of:
