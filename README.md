@@ -59,11 +59,13 @@ In it we find:
 
 The model we will use to classify our data is built on the [LeNet](https://en.wikipedia.org/wiki/LeNet) architecture:
 
-![LeNet](https://drive.google.com/uc?export=view&id=154FJGiTvd7LPUI8JhemeoO8Bl1CG27hw)
+<img src="https://drive.google.com/uc?export=view&id=154FJGiTvd7LPUI8JhemeoO8Bl1CG27hw" 
+     height="600" />
 
 Thanks to the the torchviz library, we can check out our model's structure and confirm that it is the same as LeNet's:
 
-![MNIST_model](https://github.com/federaspa/CNNs-for-image-classification/blob/main/Images/model_torchviz.png)
+<img src="https://github.com/federaspa/CNNs-for-image-classification/blob/main/Images/model_torchviz.png" 
+     height="600" />
 
 ## Training the model
 
@@ -72,4 +74,13 @@ Everything is logged in a `tensorboard`'s `SummaryWriter`, which we will later u
 
 In this part, the model is trained with an AdamW optimizer with 0.001 learning rate, loss is calculated as `CrossEntropyLoss` and the metric we use to assess our model is `MulticlassAccuracy` for 10 classes .
 
-Note that as Pytorch does not natively implement a Callback function, we implement our own in the training loop by checking at the end of every epoch if the model has made any significant improvement in the pust n epochs, where n is defined by `patience`.
+Note that as Pytorch does not natively implement a Callback function, we implement our own in the training loop by checking at the end of every epoch if the model has made any significant improvement in the past n epochs, where n is defined by `patience`.
+
+# II. Second step: Simple Convolutionnal Neural Network on more complex data
+
+## Dataset
+
+In this part we will be using the PathMNIST dataset from the MedMNIST collection. It consists of 100,000 non-overlapping image patches from histological images, and a test dataset of 7,180 image patches from a different clinical center. The dataset is comprised of 9 types of tissues, resulting in a multi-class classification task.
+
+<img src="https://medmnist.com/assets/v2/imgs/PathMNIST.jpg" 
+     width="300" />
