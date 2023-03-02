@@ -21,6 +21,8 @@ To build our neural networks, we will use **Pytorch**, one of the most used libr
 
 # I. First step : Simple Convolutionnal Neural Network (CNN)
 
+This part of the lab was heavily inspired by the [Pytorch Quickstart](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html)
+
 ## Libraries 
 1. [Pytorch](https://pytorch.org/docs/stable/index.html):  an optimized tensor library for deep learning using GPUs and CPUs.
 2. [Torchvision](https://pytorch.org/vision/stable/index.html): as part of the Pytorch project, it includes popular datasets, model architectures, and common image transformations for Computer Vision.
@@ -30,3 +32,22 @@ To build our neural networks, we will use **Pytorch**, one of the most used libr
 1. [Tqdm](https://tqdm.github.io/): a simple package to let loops show a smart progress meter.
 6. [Numpy](https://numpy.org/doc/1.24/reference/index.html)
 7. [Matplotlib](https://matplotlib.org/stable/index.html)
+
+## Dataset
+
+In this part, we will use the simple and famous [MNIST](http://yann.lecun.com/exdb/mnist/) dataset. This dataset of hand-written digits contains 60000+10000 grey level images of size 28x28 pixels.
+
+![MNIST](https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png
+)
+
+## Loading the data
+
+To load the MNIST dataset, we simply import it from `torchvisions.datasets` and then wrap it in a dataloader with a batch size of 64. \
+The original notebook explicitly normalized the images, but in our implementation this is not needed as `torchvision.transforms.ToTensor` implements it by default.\
+In order to imrove our model's learning, we shuffle the training data on loading by setting `shuffle=True`.
+
+## Building the model
+
+The model we will use to classify our data is built on the [LeNet](https://en.wikipedia.org/wiki/LeNet) architecture.
+
+To feed the data to a CNN, we need to shape it as required by Pytorch. As input, a 2D convolutional layer needs a **4D tensor** with shape: **(batch, channels, rows, cols)**. Therefore, we need to precise the "channels" axis, which can be seen as the number of level of color of each input: 3 channels if the image is in RGB, 1 if it is in grayscale.
