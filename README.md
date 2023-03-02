@@ -29,6 +29,7 @@ This part of the lab was heavily inspired by the [Pytorch Quickstart](https://py
 3. [Torchmetrics](https://torchmetrics.readthedocs.io/en/stable/): a collection of 90+ PyTorch metrics implementations and an easy-to-use API to create custom metrics. 
 4. [Torchviz](https://github.com/szagoruyko/pytorchviz): a small package to create visualizations of PyTorch execution graphs and traces.
 5. [Torchsummary](https://pypi.org/project/torch-summary/): provides information complementary to what is provided by print(your_model) in PyTorch, similar to Tensorflow's model.summary() API to view the visualization of the model.
+9. [Tensorboard](https://pytorch.org/docs/stable/tensorboard.html): a package that allows us to display a model's performance in a smart way.
 1. [Tqdm](https://tqdm.github.io/): a simple package to let loops show a smart progress meter.
 6. [Numpy](https://numpy.org/doc/1.24/reference/index.html)
 7. [Matplotlib](https://matplotlib.org/stable/index.html)
@@ -40,14 +41,35 @@ In this part, we will use the simple and famous [MNIST](http://yann.lecun.com/ex
 ![MNIST](https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png
 )
 
-## Loading the data
+## Loading and preparing the data
 
 To load the MNIST dataset, we simply import it from `torchvisions.datasets` and then wrap it in a dataloader with a batch size of 64. \
 The original notebook explicitly normalized the images, but in our implementation this is not needed as `torchvision.transforms.ToTensor` implements it by default.\
 In order to imrove our model's learning, we shuffle the training data on loading by setting `shuffle=True`.
 
+To feed the data to a CNN, we need to shape it as required by Pytorch. As input, a 2D convolutional layer needs a **4D tensor** with shape: **(batch, channels, rows, cols)**. Therefore, we need to precise the "channels" axis, which can be seen as the number of level of color of each input: 3 channels if the image is in RGB, 1 if it is in grayscale.
+
 ## Building the model
 
-The model we will use to classify our data is built on the [LeNet](https://en.wikipedia.org/wiki/LeNet) architecture.
+We build our Pytorch model by creating a custom class called `LeNet` that extends `nn.Module`. \
+In it we find:
+- `conv_stack`, which implements the convolutional layers of LeNet and to which we will pass our images to extract their features;
+- `flatten`, which will flatten our features to be passed to the next stack;
+- `dense_stack`, which implements the dense layers of LeNet and to which we will pass the flattened features to classify the images.
 
-To feed the data to a CNN, we need to shape it as required by Pytorch. As input, a 2D convolutional layer needs a **4D tensor** with shape: **(batch, channels, rows, cols)**. Therefore, we need to precise the "channels" axis, which can be seen as the number of level of color of each input: 3 channels if the image is in RGB, 1 if it is in grayscale.
+The model we will use to classify our data is built on the [LeNet](https://en.wikipedia.org/wiki/LeNet) architecture:
+
+![LeNet](https://drive.google.com/uc?export=view&id=154FJGiTvd7LPUI8JhemeoO8Bl1CG27hw)
+
+Thanks to the the torchviz library, we can check out our model's structure and confirm that it is the same as LeNet's:
+
+![MNIST_model](https://github.com/federaspa/CNNs-for-image-classification/blob/main/Images/model_torchviz.png)
+
+## Training the model
+
+Our training and validation functions iterate over each batch in the dataloaders and find each batch's output, loss and accuracy, as well as the overall epoch's. \
+Everything is logged in a `tensorboard`'s `SummaryWriter`, which we will later use to display our model's performance.
+
+In this part, the model is trained with an AdamW optimizer with 0.001 learning rate, loss is calculated as `CrossEntropyLoss` and the metric we use to assess our model is `MulticlassAccuracy` for 10 classes .
+
+Note that as Pytorch does not natively implement a Callback function, we implement our own in the training loop by checking at the end of every epoch if the model has made any significant improvement in the pust n epochs, where n is defined by `patience`.
