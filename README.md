@@ -1,4 +1,4 @@
-# CNNs for image classification
+# CNNs for image classification with PyTorch and Lightning
 
 Today, deep learning is the state-of-the-art technique used to do image classification. 
 
@@ -17,7 +17,8 @@ To do so, we will consider [MedMNIST](https://medmnist.com/). It is a large-scal
 
 It consists of re-using pre-learned network for another task. Typically, the first part of the CNN is learning a representation of images. We will use this representation in order to classify other classes of images.
 
-To build our neural networks, we will use **Pytorch**, one of the most used libraries for deep learning. While it is a little harder to handle that tensorflow, it allows for easier access to the internal structure of the models, and makes it easier to personalize the model's pipeline.
+To build our neural networks, we will use **Pytorch**, one of the most used libraries for deep learning. While it is a little harder to handle that tensorflow, it allows for easier access to the internal structure of the models, and makes it easier to personalize the model's pipeline.\
+Moreover, we will also convert each model into PyTorch Lightning to experiment with the framework. As the model-building structure is very similar to standard PyTorch, we do not explain in depth the process of building a model in Lightning. For more details, refer to [this guide](https://pytorch-lightning.readthedocs.io/en/stable/starter/converting.html)
 
 ## Libraries 
 1. [Pytorch](https://pytorch.org/docs/stable/index.html):  an optimized tensor library for deep learning using GPUs and CPUs.
@@ -26,6 +27,7 @@ To build our neural networks, we will use **Pytorch**, one of the most used libr
 4. [Torchviz](https://github.com/szagoruyko/pytorchviz): a small package to create visualizations of PyTorch execution graphs and traces.
 5. [Torchsummary](https://pypi.org/project/torch-summary/): provides information complementary to what is provided by print(your_model) in PyTorch, similar to Tensorflow's model.summary() API to view the visualization of the model.
 9. [Tensorboard](https://pytorch.org/docs/stable/tensorboard.html): a package that allows us to display a model's performance in a smart way.
+11. [PyTorch Lightning](https://pytorch-lightning.readthedocs.io/en/stable/): a framework that provides great tools to extend pytorch's flexibility
 10. [PIL](https://pillow.readthedocs.io/en/stable/): a lbrary that provides extensive file format support, an efficient internal representation, and fairly powerful image processing capabilities.
 1. [Tqdm](https://tqdm.github.io/): a simple package to let loops show a smart progress meter.
 6. [Numpy](https://numpy.org/doc/1.24/reference/index.html)
@@ -111,7 +113,7 @@ The model's training is also almost identical to the one for the first part, wit
 
 ## Results
 
-
+This dataset is much more complex than MNIST, therefore the model's performance is lower, as expected. I takes more epochs to reach the EarlyStopping's threshould, but we eventually manage to rach satisfying accuracy.
 
 # III. Third step: Transfer Learning
 
@@ -161,4 +163,8 @@ The model's training is almost identical to the ones before, again with the only
 
 ## Results
 
+There is not much difference between the frozen model and the fine-tuned model, most likely since we only fine-tune the last convolution. Nevertheless, the model has good performance, despite the vgg16-based feature extractor not being trained on our dataset. This shows the power of transfer learning, which allows us to re-deploy pre-trained models, or part of them (in our case we only use the features part of vgg16), to reach satisfying performance without going through extensive and expensive training.
+
 # Conclusions
+
+In this project we experimented with the PyTorch and PyTorch Lightning frameworks to classify more and more complex datasets. In doing so, we also experimented with more advanced techniques such as transfer learning and fine-tuning.
