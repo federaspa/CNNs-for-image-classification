@@ -78,11 +78,11 @@ Everything is logged in a `tensorboard`'s `SummaryWriter`, which we will later u
 
 In this part, the model is trained with an AdamW optimizer with 0.001 learning rate, loss is calculated as `CrossEntropyLoss` and the metric we use to assess our model is `MulticlassAccuracy` for 10 classes. We run 20 training epochs.
 
-Note that as Pytorch does not natively implement a Callback function, we implement our own in the training loop by checking at the end of every epoch if the model has made any significant improvement in the past n epochs, where n is defined by `patience`.
+Note that as Pytorch does not natively implement an EarlyStopping function, we implement our own in the training loop by checking at the end of every epoch if the model has made any significant improvement in the past n epochs, where n is defined by `patience`.
 
 ## Results
 
-Setting 20 epochs, our model has reached a satisfying performance on the test set of about 98%, stopping after 15 thanks to our Callback. \
+Setting 20 epochs, our model has reached a satisfying performance on the test set of about 98%, stopping after 15 thanks to our EarlyStopping. \
 We can notice that with our parameters the model does not seem to be overfitting, therefore there is still room to boost it by tweaking the type and parameters of the optimizer or decreasing the batch size.
 
 # II. Second step: Simple Convolutional Neural Network on more complex data
@@ -165,7 +165,7 @@ The model's training is almost identical to the ones before, again with the only
 
 ## Results
 
-There is not much difference between the frozen model and the fine-tuned model, most likely since we only fine-tune the last convolution. Nevertheless, the model has good performance, despite the vgg16-based feature extractor not being trained on our dataset. This shows the power of transfer learning, which allows us to re-deploy pre-trained models, or part of them (in our case we only use the features part of vgg16), to reach satisfying performance without going through extensive and expensive training.
+There is not much difference between the frozen model and the fine-tuned model, most likely since we only fine-tune the last convolution. Nevertheless, both models have very good performance (around 98%), despite the vgg16-based feature extractor not being trained on our dataset or onl. This shows the power of transfer learning, which allows us to re-deploy pre-trained models, or part of them (in our case we only use the features part of vgg16), to reach satisfying performance without going through extensive and expensive training.
 
 # Conclusions
 
