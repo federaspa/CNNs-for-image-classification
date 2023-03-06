@@ -133,13 +133,14 @@ For this last part, we will use the [Animal-10](https://www.kaggle.com/datasets/
      
 ## Loading the data
 
-As for the previous part, the dataset is quite big, therefore we load it from a local directory. We first create, for both the training and the test split, two numpy arrays containing the images and labels respectively. Then we use a custom Dataset called `AnimalDataset` to wrap the images in a dataset like we did in the previous part.\
-Note that we reshape the images from `(N,H,W,C)` to `(N,C,H,W)` in order to feed them to `VGG16`.\
+As for the previous part, the dataset is quite big, therefore we load it from a local directory. We first create, for both the training and the test split, two torch tensors containing the images and labels respectively. Then we use a custom Dataset called `AnimalDataset` to wrap the images in a dataset like we did in the previous part.\
+Note that we preprocess the images from in order to feed them to `VGG16`.\
 Since this dataset does not come with a validation split, we will create the validation split ourselves.\
-Note that after the images are loaded, they look slightly corrupted:\
-![Cow](https://github.com/federaspa/CNNs-for-image-classification/blob/main/Images/cow.png)
+Note that after the images are loaded, they look corrupted:\
+<img src = "https://github.com/federaspa/CNNs-for-image-classification/blob/main/Images/download.png"
+     width = "300" />
 
-This is normal and is an effect of our resizing and conversion steps we implemented at loading.
+This is normal and is an effect of the preprocessing we implemented at loading.
 
 ## Building and Training the model
 
