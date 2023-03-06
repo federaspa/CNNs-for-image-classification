@@ -92,7 +92,7 @@ We can notice that with our parameters the model does not seem to be overfitting
 In this part we will be using the PathMNIST dataset from the MedMNIST collection. It consists of 100,000 non-overlapping image patches from histological images, and a test dataset of 7,180 image patches from a different clinical center. The dataset is comprised of 9 types of tissues, resulting in a multi-class classification task.
 
 <img src="https://medmnist.com/assets/v2/imgs/PathMNIST.jpg" 
-     width="300" />
+     width="400" />
      
 ## Loading and preparing the data
 
@@ -128,8 +128,9 @@ In our case, since we will try to fine-tune the pre-trained `VGG16` model to wor
 
 For this last part, we will use the [Animal-10](https://www.kaggle.com/datasets/alessiocorrado99/animals10) dataset, consisting of about 28K medium quality animal images belonging to 10 categories.
 
-![Cane](https://storage.googleapis.com/kagglesdsdata/datasets/59760/840806/raw-img/cane/OIF-e2bexWrojgtQnAPPcUfOWQ.jpeg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=databundle-worker-v2%40kaggle-161607.iam.gserviceaccount.com%2F20230302%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230302T104722Z&X-Goog-Expires=345600&X-Goog-SignedHeaders=host&X-Goog-Signature=56cdcfd09ac46d923f3ff3e83d9210b0096f5d1df043f48533b069efde6d352ff8c5d91f496d9113804c1fe353567d0fbb36d08d27b17465a60989ddd12f884df4d0f1ef112429b1103248e5d86362c1f2c9754a57a3d0e4ad7d74ff0dd57e63d86c63e965320159356fb004c8d89a0d88d2ee6f9e78acd726cb980f22143329eec75363f919c10b8369798fa1642ad7e7511b9431f817421e29655a55f94939295e005fbdc8ec27985819ea18b81977638fbeb1080776f257165b0a1c2c4c602693d077bc7f96f5392ff4c3f93e2153a5e8d37d5cb70ea93e12f16ed24c7df536f87deff8917efd7ec3a24f8fd997bd36c940f58eb434dca52f5c16dc77eb68)
-
+<img src="https://production-media.paperswithcode.com/datasets/animal.JPG" 
+     width="600" />
+     
 ## Loading the data
 
 As for the previous part, the dataset is quite big, therefore we load it from a local directory. We first create, for both the training and the test split, two numpy arrays containing the images and labels respectively. Then we use a custom Dataset called `AnimalDataset` to wrap the images in a dataset like we did in the previous part.\
