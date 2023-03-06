@@ -34,7 +34,7 @@ Moreover, we will also convert each model into PyTorch Lightning to experiment w
 7. [Matplotlib](https://matplotlib.org/stable/index.html)
 
 
-# I. First step : Simple Convolutionnal Neural Network (CNN)
+# I. First step : Simple ll Neural Network (CNN)
 
 This part of the lab was heavily inspired by the [Pytorch Quickstart](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html)
 
@@ -49,7 +49,7 @@ In this part, we will use the simple and famous [MNIST](http://yann.lecun.com/ex
 
 To load the MNIST dataset, we simply import it from `torchvisions.datasets` and then wrap it in a dataloader with a batch size of 64. \
 The original notebook explicitly normalized the images, but in our implementation this is not needed as `torchvision.transforms.ToTensor` implements it by default.\
-In order to imrove our model's learning, we shuffle the training data on loading by setting `shuffle=True`.
+In order to improve our model's learning, we shuffle the training data on loading by setting `shuffle=True`.
 
 To feed the data to a CNN, we need to shape it as required by Pytorch. As input, a 2D convolutional layer needs a **4D tensor** with shape: **(batch, channels, rows, cols)**. Therefore, we need to precise the "channels" axis, which can be seen as the number of level of color of each input: 3 channels if the image is in RGB, 1 if it is in grayscale.
 
@@ -85,7 +85,7 @@ Note that as Pytorch does not natively implement a Callback function, we impleme
 Setting 20 epochs, our model has reached a satisfying performance on the test set of about 98%, stopping after 15 thanks to our Callback. \
 We can notice that with our parameters the model does not seem to be overfitting, therefore there is still room to boost it by tweaking the type and parameters of the optimizer or decreasing the batch size.
 
-# II. Second step: Simple Convolutionnal Neural Network on more complex data
+# II. Second step: Simple Convolutional Neural Network on more complex data
 
 ## Dataset
 
@@ -113,7 +113,7 @@ The model's training is also almost identical to the one for the first part, wit
 
 ## Results
 
-This dataset is much more complex than MNIST, therefore the model's performance is lower, as expected. I takes more epochs to reach the EarlyStopping's threshould, but we eventually manage to rach satisfying accuracy.
+This dataset is much more complex than MNIST, therefore the model's performance is lower, as expected. It takes more epochs to reach the EarlyStopping's threshold, but we eventually manage to rach satisfying accuracy.
 
 # III. Third step: Transfer Learning
 
